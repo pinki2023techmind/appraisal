@@ -34,7 +34,7 @@ function Dashboard() {
                   <Col xs="7" className='bg-white '>
                     <div className="text-center">
                       <p className="card-category fs-6 text-dark">ORDERED</p>
-                      <Card.Title as="h4">2</Card.Title>
+                      <Card.Title as="h3" className='text-info py-2'>2</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -54,7 +54,7 @@ function Dashboard() {
                   <Col xs="7" className='bg-white'>
                     <div className="text-center">
                       <p className="card-category text-dark">ACCEPTED</p>
-                      <Card.Title as="h4">4</Card.Title>
+                      <Card.Title as="h3" className='text-primary py-2'>4</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -74,7 +74,7 @@ function Dashboard() {
                   <Col xs="7" className='bg-white'>
                     <div className="text-center">
                       <p className="card-category text-dark">INSPECTION DATE SET</p>
-                      <Card.Title as="h4">1</Card.Title>
+                      <Card.Title as="h3" className='text-warning'>1</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -93,7 +93,7 @@ function Dashboard() {
                   <Col xs="7" className='bg-white'>
                     <div className="text-center">
                       <p className="card-category  text-dark">REPORT DELIVERED</p>
-                      <Card.Title as="h4">14</Card.Title>
+                      <Card.Title as="h3" className='text-success py-2'>14</Card.Title>
                     </div>
                   </Col>
                 </Row>
@@ -177,7 +177,7 @@ function Dashboard() {
           <Col md="6">
             <Card >
               <Card.Header>
-                <Card.Title className='d-flex ' as="h4">Appraisal Report SLA
+                <Card.Title className='d-flex' as="h4">Appraisal Report SLA
                   <div class="form-group has-search px-2">
                     <span class="fa fa-search absolute form-control-feedback"></span>
                     <input type="text" class="form-control " placeholder="Search" />
