@@ -12,9 +12,13 @@ import {
   Row,
   Col
 } from "react-bootstrap";
-import { Link } from "react-router-dom/cjs/react-router-dom";
 
 function Login() {
+  
+  const handleSubmit = () =>{
+    // Navigate('/admin')
+    
+  }
   return (
     <>
       <Container className="p-4 d-flex gap-8  justify-content-center" fluid>
@@ -23,7 +27,7 @@ function Login() {
                 <Card.Title as="h4">Login</Card.Title>
               </Card.Header>
               <Card.Body>
-                <Form >
+                <Form onSubmit={handleSubmit}>
                   <Row>
                     <Col >
                       <Form.Group>
@@ -48,13 +52,13 @@ function Login() {
                 
                   </Row>
                 
-                  <Link to ='/admin/dashboard'
+                  <Button 
                     className="btn-fill"
                     type="submit"
                     variant="info"
                   >
                    Login
-                  </Link>
+                  </Button>
                   <div className="clearfix"></div>
                 </Form>
               </Card.Body>

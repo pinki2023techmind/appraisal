@@ -9,10 +9,8 @@ import Sidebar from "components/Sidebar/Sidebar";
 import routes from "routes.js";
 import Login from "./Login";
 
-// import sidebarImage from "assets/img/sidebar-3.jpg";
 
 function Admin() {
-  // const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("black");
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
@@ -47,7 +45,7 @@ function Admin() {
   }, [location]);
   return (
     <>
-   
+    {/* <Login/> */}
       <div className="wrapper">        
         <Sidebar color={color} routes={routes} />
         <div className="main-panel" ref={mainPanel}>

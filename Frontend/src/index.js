@@ -24,9 +24,9 @@ root.render(
         window.location.pathname == '/' ? <Login/> : <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
 
       } */}
-      {/* <Route path='/login' element={<Login/>}></Route> */}
+      {/* <Login/> */}
       <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect from="/admin" to="/admin/dashboard" />
+      <Redirect from="/" to="/admin/dashboard" />
     </Switch>
   </BrowserRouter>
 );
