@@ -383,4 +383,190 @@
 
     }
 
+    //fetch user data
+
+    function getUser()
+    {
+
+        global $conn;
+        
+        try {
+            $key = 'example_key';
+            $headers=getallheaders();
+            $authcode=trim($headers['Authorization']);
+            $token=substr($authcode,7);
+            $decoded = JWT::decode($token, new Key($key,'HS256'));
+         
+            $query = "SELECT * FROM userinfo";
+        
+            $query_run = mysqli_query($conn, $query);
+            
+        if($query_run)
+        {
+            
+            if(mysqli_num_rows($query_run) > 0)
+            {
+                
+                $res = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
+
+                $data = [
+                    'status' =>200,
+                    'message' =>'User list fetch successfully',
+                    'data' =>$res
+                ];
+                header("HTTP/1.0 200 Ok");
+                return json_encode($data);
+        
+
+            }else
+            {
+                $data = [
+                    'status' =>404,
+                    'message' =>'No User Find',
+                ];
+                header("HTTP/1.0 404 No User Find");
+                return json_encode($data);
+            }
+        }
+
+        else
+        {
+            $data = [
+                'status' =>500,
+                'message' =>'Internal server error',
+            ];
+            header("HTTP/1.0 500 Internal server error");
+            return json_encode($data);
+
+        }
+          }
+          
+          //catch exception
+          catch(Exception $e) {
+            
+            echo 'Message: ' .$e->getMessage();
+
+          }
+   
+    }
+
+    //add user
+
+    function addUsers($userInput)
+    {
+        global $conn;
+             
+                $username = mysqli_real_escape_string($conn, $userInput['username']);
+                $email = mysqli_real_escape_string($conn, ($userInput['email']));
+                $father = mysqli_real_escape_string($conn, $userInput['father_name']);
+                $phone = mysqli_real_escape_string($conn, $userInput['phone_number']);
+                $course = mysqli_real_escape_string($conn, $userInput['course_name']);
+                $admission = mysqli_real_escape_string($conn, $userInput['admission_date']);
+  
+            
+                if(empty(trim($username))){
+                    return error422('Enter your  username');
+                }
+                if(empty(trim($email))){
+                    return error422('Enter the email');
+                }
+                if(empty(trim($admission))){
+                    return error422('Enter your  admission date');
+                }
+  
+        else
+        {
+           
+            
+            $insertQuery = "INSERT INTO userinfo 
+            (username, email, password, father_name, phone_number, course_name, admission_date)
+            Values('$username', '$email', MD5('1234') ,'$father', '$phone', '$course', '$admission')";
+           
+        
+            $result = mysqli_query($conn, $insertQuery);
+           
+            if($result)
+            {
+                $data = [
+  
+                    'status' =>201,
+                    'message' =>' inserted successfully',
+                ];
+                header("HTTP/1.0 201 Created");
+                return json_encode($data);
+            }
+            else
+            {
+                $data = [
+                    'status' =>500,
+                    'message' =>'internal server error',
+                ];
+                header("HTTP/1.0 500 internal server error");
+                return json_encode($data);
+            }
+  
+        }
+    }
+
+
+      //fetch  user data with id 
+
+  function getInvoiceUser($params)
+  {
+      global $conn;
+
+          if(!isset($params['id'])){
+              return error422("product id not found");
+          }
+          elseif($params['id'] == null ){
+              return error422("Enter the product id");
+          }
+              $id = mysqli_real_escape_string($conn, $params['id']);
+            
+              $insertQuery = "SELECT * FROM userinfo where id = '$id'";
+            
+              $query_run = mysqli_query($conn, $insertQuery);
+        
+      if($query_run)
+      {
+          
+          if(mysqli_num_rows($query_run) > 0)
+          {
+
+              $res = mysqli_fetch_all($query_run, MYSQLI_ASSOC);
+
+              $data = [
+                  'status' =>200,
+                  'message' =>'User list fetch successfully',
+                  'data' =>$res
+              ];
+              header("HTTP/1.0 200 Ok");
+              return json_encode($data);
+      
+
+          }else
+          {
+              $data = [
+                  'status' =>404,
+                  'message' =>'No User Find',
+              ];
+              header("HTTP/1.0 404 No User Find");
+              return json_encode($data);
+          }
+      }
+
+      else
+      {
+          $data = [
+              'status' =>500,
+              'message' =>'Internal server error',
+          ];
+          header("HTTP/1.0 500 Internal server error");
+          return json_encode($data);
+
+      }
+      
+    
+  }
+
 ?>
