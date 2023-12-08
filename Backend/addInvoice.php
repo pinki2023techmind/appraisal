@@ -8,20 +8,20 @@
     header('Access-Control-Allow-Headers:Content-Type, Access-Control-Allow-Headers, Authorization, X-request-With');
 
 
-        require_once('function.php');
-
+        require_once('invoiceFunction.php');
 
             $inputData = json_decode(file_get_contents("php://input"), true);
-            // echo $inputData['first_name'];
+          
 
             if(empty($inputData))
             {
-                $login= login($_POST);
+                $storeInvoice = storeInvoice($_POST);
             }
             else
             {
-                $login= login($inputData);
+                $storeInvoice = storeInvoice($inputData);
                 
             }
-       
+           echo $storeInvoice;
+
 ?>
